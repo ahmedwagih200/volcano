@@ -1,52 +1,32 @@
-import Navbar from './components/Navbar';
-import About from './components/About';
-import Footer from './components/Footer';
-import Menu from './components/Menu';
+import { BrowserRouter as Router, Route, Routes, Navigate ,Outlet } from "react-router-dom";
+import { Login } from './components/forms/login';
+import { Signup } from './components/forms/Signup';
+import  Empty  from './components/forms/Empty';
+import Main from './pages/Main'
+import Navbar from './components/navbar/Navbar'
 import './style.css';
-import {
-  MDBCarousel,
-  MDBCarouselInner,
-  MDBCarouselItem,
-  MDBCarouselElement,
-} from 'mdb-react-ui-kit';
+import "./components/footer/footer.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import d1 from './d1.jpg';
-import d2 from './d2.jpg';
-import d3 from './d3.jpg';
-import d4 from './d4.jpg';
-
-
 
 function App() {
   return (
-    <div className="bg-light">
+    <Router>
       <Navbar />
-      <MDBCarousel className='container1'>
+      <Routes>
+      <Route path="Main" element={<Main />}  />
 
-        <MDBCarouselInner>
 
-          <MDBCarouselItem className='active'>
-            <MDBCarouselElement className='imgg' src={d1}  />
-          </MDBCarouselItem>
-         
-          
-         
-
-        </MDBCarouselInner>
-
-        <div className='middle'>
-          <div class="text"><center></center></div>
+      <Route path="Empty" element={<Empty />}  >
+      <Route path="Signup" element={<Signup />}  />
+      <Route path="Login" element={<Login />}  />
+      </Route>
 
 
 
-
-        </div>
-
-      </MDBCarousel>
-      <Menu />
-      <About />
-      <Footer />
-    </div>
+      <Route path="" element={<Navigate to="/Main" />} />
+      </Routes>
+    </Router>
+    
   );
 }
 export default App;
