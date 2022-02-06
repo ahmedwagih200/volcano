@@ -10,11 +10,12 @@ function Navbar() {
     AOS.init();
     return (
 
-    <div style={{height: "95px"}} data-aos="fade-right" data-aos-duration="1500" className="container-fluid sticky-top bg-light">
+    <div data-aos="fade-right" data-aos-duration="1500" className="container-fluid sticky-top bg-light">
         <div className="row justify-content-center ">
             <Navlink name="Home" val="Main"/>
             <Navitem name="Menu" val="Main#menu"/>
-            <div style={{marginRight:"-50px", marginLeft:"-50px",  marginTop: "-20px", transform: 'scale(0.6)'}} className="col-md-auto navbar-header">
+            <div style={{marginRight:"-50px", marginLeft:"-50px",  marginTop: "-20px",marginBottom: "-20px",
+                transform: 'scale(0.6)'}} className="col-md-auto navbar-header">
                 <img src={logo} alt="logo"/>
             </div>
             <Navitem name="About" val="Main#about"/>
