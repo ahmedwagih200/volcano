@@ -36,8 +36,6 @@ function Menu() {
             })
             }
 
-
-
         </div>
 
         <div className="row justify-content-center">
