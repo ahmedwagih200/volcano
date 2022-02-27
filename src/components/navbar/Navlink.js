@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 function Navlink(props) {
   return (
-    <NavLink style={{marginTop:"25px" ,fontSize:'25px'}} to={props.val} className="nav-link active px-lg-4 rounded">
+    <NavLink style={{marginTop:"25px" ,fontSize:'25px'}} to={props.val} className="col-md-auto nav-link active px-lg-4 rounded">
      {props.name}
     </NavLink>
   );
