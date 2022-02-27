@@ -16,10 +16,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Cart from "./components/cart/Cart";
 import { toast, ToastContainer } from "react-toastify";
 import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 function App() {
+  const [movieInfo, setInfo] = useState({});
+
   useEffect(() => {
-    toast.success("We are having big sales on pancakes !");
+    axios
+      .get(``)
+      .then((res) => {
+        console.log(res);
+        setInfo(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    toast.success("updates");
   }, []);
   return (
     <>
