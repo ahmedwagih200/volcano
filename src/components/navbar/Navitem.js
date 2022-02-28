@@ -4,7 +4,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 
 function Navbaritem(props) {
   return ( 
-    <Link style={{marginTop:"25px" ,fontSize:'25px'}} className="nav-link active px-lg-4 rounded" to={props.val}>{props.name}</Link>
+    <Link style={{ marginTop:"25px" ,fontSize:'25px'}} className="col-md-auto nav-link active px-lg-4 rounded" to={props.val}>{props.name}</Link>
   );
 }
 export default Navbaritem;

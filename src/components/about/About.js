@@ -2,7 +2,7 @@ import '../about/about.css';
 
 function About() {
   return (
-    <div data-aos="fade-down" data-aos-duration="1500" className="about" style={{backgroundColor: '#ffffff', padding:'10px'}} >
+    <div data-aos="fade-down" data-aos-duration="2000" className="about" style={{backgroundColor: '#ffffff', padding:'10px'}} >
       <div data-aos="fade-down" data-aos-duration="1000" id="about" className="offset container mt-3 mb-5">
         <div  style={{ textAlign: 'center' , marginTop: '150px'}} >
           <h1 className="display-4 font-weight-bold">About Us</h1>

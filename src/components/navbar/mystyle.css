@@ -1,11 +1,4 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-navbar{
-    background-color: white;
-}
+
 .nav-link{
     height: 100%;
     color: black;
