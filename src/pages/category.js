@@ -1,5 +1,5 @@
 
-import { useParams } from "react-router-dom"
+import { useParams  , useLocation} from "react-router-dom"
 import {Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 
@@ -10,22 +10,24 @@ function Category(){
     
     const params = useParams()
     const [cate , set_cate] = useState([])
-         
+    const [cname , set_cname] = useState('')
+    const  location =useLocation() 
       useEffect(()=>{
     
               axios.get(`http://localhost:8000/category/${params.id}`).then(res=> {set_cate(res.data) ; console.log(res.data) }  )
+              axios.get(`http://localhost:8000/cate/${params.id}`).then(res=> set_cname(res.data.name)   )
     
     
-      } ,[])
+      } ,[location])
 
     return <div className="container mt-5">
-        {/* <h2> {params.name} </h2> */}
+         <h2> {cname} </h2> 
 
 <div className="row mx-5">
     <div className="col-3 my-4">
     <div className="list-group">
   <Link to="/category/6" className="list-group-item list-group-item-action text-center text-capitalize"> mini pancakes </Link>
-  <Link to="/Main" className="list-group-item list-group-item-action text-center text-capitalize"> waffles </Link>
+  <Link to="/category/4" className="list-group-item list-group-item-action text-center text-capitalize"> waffles </Link>
   <Link to={`/category/1`} className="list-group-item list-group-item-action text-center text-capitalize"> cakes </Link>
   <Link to={`/category/2`} className="list-group-item list-group-item-action text-center text-capitalize"> molten cakes </Link>
   <Link to={`/category/5`} className="list-group-item list-group-item-action text-center text-capitalize"> boom ice cream </Link>
