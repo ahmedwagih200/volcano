@@ -1,49 +1,73 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
-import { TextField } from './TextField';
-import * as Yup from 'yup';
-import { NavLink } from 'react-router-dom';
-import {
-    BrowserRouter as Router, Route, Routes, Link ,Outlet
-  } from 'react-router-dom';
-  
+import React, { useState } from 'react';
+import { Link, Navigate, useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../../actions/auth';
 
 
-export const Login = () => {
-    const validate = Yup.object({
+const Login = ({ login, isAuthenticated }) => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
 
-        email: Yup.string()
-            .email('Email is invalid')
-            .required('Email is required'),
+    const { email, password } = formData;
 
-        password: Yup.string()
-            .min(8, "cant be less than 8 chars")
-            .required('Password is required')
-    })
+    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    const onSubmit = e => {
+        e.preventDefault();
+
+        login(email, password);
+    };
+
+    if (isAuthenticated) {
+        return <Navigate to='/' />
+    }
+
+
     return (
-        <div style={{ width: '30%'}} className="container">
-            <Formik 
-                initialValues={{
-                    email: '',
-                    password: '',
-                }}
-                validationSchema={validate}
-                onSubmit={values => {
-                    console.log(values)
-                }}
-            >
-                {() => (
-                    <div >
-                        <h1  className="my-4 font-weight-bold .display-4">Login</h1>
-                        <Form >
-                            <TextField label="Email" name="email" type="email" />
-                            <TextField label="password" name="password" type="password" />
-                            <button style={{marginRight: '6px'}} className="btn btn-dark mt-3" type="submit">Login</button>
-                            <Link className="btn btn-dark mt-3" to="/Empty/Signup" >Signup</Link>
-                        </Form>
-                    </div>
-                )}
-            </Formik>
+        <div style={{ width: '30%' }} className="container">
+            <h1>Sign In</h1>
+            <p>Sign into your Account</p>
+            <form onSubmit={e => onSubmit(e)}>
+                <div style={{marginBottom: '5px'}} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='email'
+                        placeholder='Email'
+                        name='email'
+                        value={email}
+                        onChange={e => onChange(e)}
+                        required
+                    />
+                </div>
+                <div  className='form-group'>
+                    <input
+                        className='form-control'
+                        type='password'
+                        placeholder='Password'
+                        name='password'
+                        value={password}
+                        onChange={e => onChange(e)}
+                        minLength='6'
+                        required
+                    />
+                </div>
+                <button style={{marginRight: '6px'}} className="btn btn-dark mt-3" type="submit">Login</button>
+            </form>
+
+            <p className='mt-3'>
+                Don't have an account? <Link to='/Empty/Signup'>Sign Up</Link>
+            </p>
+            <p className='mt-3'>
+                Forgot your Password? <Link to='/Empty/ResetPassword'>Reset Password</Link>
+            </p>
         </div>
-    )
-}
+    );
+};
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);

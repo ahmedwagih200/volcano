@@ -1,68 +1,140 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
-import { TextField } from './TextField';
-import * as Yup from 'yup';
+import React, { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signup } from '../../actions/auth';
 
-
-export const Signup = () => {
-
-
-  const validate = Yup.object({
-    name: Yup.string()
-      .required('Required'),
-
-      username: Yup.string()
-      .required('Required')
-      .matches(/^\S*$/,
-        "Must have no spaces"
-      ),
-
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
-
-    password: Yup.string()
-      .required('Password is required') 
-      .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-      ),
-
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Password must match')
-      .required('Confirm password is required'),
-  })
-
-  
-  return (
-    <div style={{ width: '30%' }} className="container">
-    <Formik
-      initialValues={{
-        name: '',
-        username: '',
+const Signup = ({ signup, isAuthenticated }) => {
+    const [accountCreated, setAccountCreated] = useState(false);
+    const [formData, setFormData] = useState({
+        first_name: '',
+        last_name: '',
         email: '',
+        address: '',
+        phone: '',
         password: '',
-        confirmPassword: ''
-      }}
-      validationSchema={validate}
-      onSubmit={values => {
-        console.log(values)
-      }}
-    >
-      {() => (
-        <div>
-          <h1 className="my-4 font-weight-bold .display-4">Sign Up</h1>
-          <Form >
-            <TextField label="Name" name="name" type="text" />
-            <TextField label="User Name" name="username" type="text" />
-            <TextField label="Email" name="email" type="email" />
-            <TextField label="password" name="password" type="password" />
-            <TextField label="Confirm Password" name="confirmPassword" type="password" />
-            <button className="btn btn-dark mt-3" type="submit">Register</button>
-          </Form>
+        re_password: ''
+    });
+
+    const { first_name, last_name, email, address, phone, password, re_password } = formData;
+
+    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    const onSubmit = e => {
+        e.preventDefault();
+
+        if (password === re_password) {
+            signup(first_name, last_name, email, address, phone, password, re_password);
+            setAccountCreated(true);
+        }
+    };
+
+
+    if (isAuthenticated) {
+        return <Navigate to='/' />
+    }
+    if (accountCreated) {
+        return <Navigate to='/Empty/Login' />
+    }
+
+    return (
+        <div style={{ width: '30%' }} className='container mt-5'>
+            <h1>Sign Up</h1>
+            <p>Create your Account</p>
+            <form onSubmit={e => onSubmit(e)}>
+                <div style={{ margin: '5px' }} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='text'
+                        placeholder='First Name'
+                        name='first_name'
+                        value={first_name}
+                        onChange={e => onChange(e)}
+                        required
+                    />
+                </div>
+                <div style={{ margin: '5px' }} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='text'
+                        placeholder='Last Name'
+                        name='last_name'
+                        value={last_name}
+                        onChange={e => onChange(e)}
+                        required
+                    />
+                </div>
+                <div style={{ margin: '5px' }} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='email'
+                        placeholder='Email'
+                        name='email'
+                        value={email}
+                        onChange={e => onChange(e)}
+                        required
+                    />
+                </div>
+                <div style={{ margin: '5px' }} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='text'
+                        placeholder='Phone'
+                        name='phone'
+                        value={phone}
+                        onChange={e => onChange(e)}
+                        required
+                    />
+                </div>
+                <div style={{ margin: '5px' }} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='text'
+                        placeholder='Address'
+                        name='address'
+                        value={address}
+                        onChange={e => onChange(e)}
+                        required
+                    />
+                </div>
+                <div style={{ margin: '5px' }} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='password'
+                        placeholder='Password'
+                        name='password'
+                        value={password}
+                        onChange={e => onChange(e)}
+                        minLength='6'
+                        required
+                    />
+                </div>
+                <div style={{ margin: '5px' }} className='form-group'>
+                    <input
+                        className='form-control'
+                        type='password'
+                        placeholder='Confirm Password'
+                        name='re_password'
+                        value={re_password}
+                        onChange={e => onChange(e)}
+                        minLength='6'
+                        required
+                    />
+                </div>
+
+                <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3" type='submit'>Register</button>
+            </form>
+
+            <br />
+
+            <p className='mt-3'>
+                Already have an account? <Link to='/Empty/Login'>Sign In</Link>
+            </p>
         </div>
-      )}
-    </Formik>
-  
-    </div>
-  )
-}
+    );
+};
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { signup })(Signup);
