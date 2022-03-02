@@ -1,59 +1,56 @@
-import img0 from "../imgs/mini pancakes"
-import img1 from "../imgs/waffles"
-import img2 from "../imgs/cakes"
-import img3 from "../imgs/molten cakes"
-import img4 from "../imgs/boom ice cream"
-import img5 from "../imgs/cheese cake"
-import '../menu/menu.css';
+
+
+import {Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+
+import axios from 'axios'
+
+
+
 
 
 function Menu() {
-
-    const imgs = ["mini pancakes", "waffles", "cakes",]
-    const imgs2 = ["molten cakes", "boom ice cream", "cheese cake"]
-
-    const arr = [img0, img1, img2]
-    const arr2 = [img3, img4, img5]
-
-    return < div id="menu" className="container-fluid menu">
-
-        <div className="row justify-content-center">
-            <h1 data-aos="fade-down" data-aos-duration="2000" style={{
-                color: '#917c36', paddingTop: '100px',
-                marginLeft: '35px'
-            }} className="text-center text-capitalize"> our menu </h1>
-
-            {arr.map((img, ind) => {
-                return <div data-aos="fade-down" data-aos-duration="1500" style={{margin: '25px'}}
-                            className="col-md-auto">
-                    <div className="card" style={{width: '250px', margin: '10px', color: '#917c36'}}>
-                        <img className="card-img-top" src={img} style={{height: "200px"}}/>
+    const [cate , set_cate] = useState([])
+         
+      useEffect(()=>{
+    
+              axios.get('http://localhost:8000/categories').then(res=> set_cate(res.data)  )
+    
+    
+      } ,[])
+    
+      
+        
+       return <div className="container mt-5">
+           <h1 className="text-center text-capitalize" > our minu </h1>
+        <div className="row mx-5">
+            
+        
+           {
+               cate.map(( c , ind  )=>{
+          
+           return <div className="col-lg-3 col-md-4 col-sm-6 my-4 ">
+                <Link to={`/category/${c.id}`} > 
+                 { console.log(c.image )}
+                      <div className=" card h-100">
+                        <img className="card-img-top" src={`http://localhost:8000${c.image }`} style={{height:"250px" }}/>
                         <div className="card-body">
-                            <h5 className="card-title  text-center text-capitalize">{imgs[ind]}</h5>
+                            <h5 className="card-title  text-center text-capitalize">{ c.name }</h5>
+    
                         </div>
-                    </div>
-                </div>
+    
+                    </div> </Link>
+                 
+    
+    
+                </div> 
+              
             })
-            }
-
-        </div>
-
-        <div className="row justify-content-center">
-            {arr2.map((img, ind) => {
-                return <div data-aos="fade-up" data-aos-duration="1500" style={{margin: '25px'}}
-                            className="col-md-auto">
-                    <div className="card" style={{width: '250px', margin: '10px', color: '#917c36'}}>
-                        <img className="card-img-top" src={img} style={{height: "200px"}}/>
-                        <div className="card-body">
-                            <h5 className="card-title  text-center text-capitalize">{imgs2[ind]}</h5>
-                        </div>
-                    </div>
+           }
+    
+    
+            </div>
                 </div>
-            })
-            }
-        </div>
-
-    </div>
-
+                
 }
 export default Menu
