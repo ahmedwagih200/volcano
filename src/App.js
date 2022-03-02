@@ -12,8 +12,7 @@ import "./components/footer/footer.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Provider} from 'react-redux';
 import store from './store';
-import Profile from "./components/forms/Profile";
-import ChangePassword from "./components/forms/ChangePassword";
+
 
 function App() {
     return (
