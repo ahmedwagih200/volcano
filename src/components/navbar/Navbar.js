@@ -1,16 +1,47 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { Fragment, useState,useEffect  } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {checkAuthenticated, load_user, logout} from '../../actions/auth';
 import './mystyle.css';
 import AOS from 'aos';
+
 import 'aos/dist/aos.css';
 import Navitem from './Navitem';
 import Navlink from './Navlink';
 import logo from '../imgs/stockLogo.jpeg';
 
-function Navbar() {
+function Navbar({ logout, isAuthenticated } ) {
     AOS.init();
-    return (
+    const [redirect, setRedirect] = useState(false);
 
-    <div data-aos="fade-right" data-aos-duration="1500" className="container-fluid sticky-top bg-light">
+    useEffect(() => {
+        checkAuthenticated();
+        load_user();
+    }, []);
+
+
+    const logout_user = () => {
+        console.log("hi")
+        logout();
+        setRedirect(true);
+    };
+
+    const guestLinks = () => (
+
+            <Navlink name="Login" val="Empty/Login"/>
+
+    );
+
+    const authLinks = () => (
+        <div className="col-md-auto">
+            <Navlink name="Profile" val="Empty/Profile"/>
+            <a  href='#' onClick={logout_user}>Logout</a>
+        </div>
+    );
+
+    return (
+    <div data-aos="fade-right" data-aos-duration="1500" className=" container-fluid sticky-top bg-light">
         <div className="row justify-content-center ">
             <Navlink name="Home" val="Main"/>
             <Navitem name="Menu" val="Main#menu"/>
@@ -20,11 +51,17 @@ function Navbar() {
             </div>
             <Navitem name="About" val="Main#about"/>
             <Navitem name="Contact" val="Main#contact"/>
-            <Navlink name="Login" val="Empty/Login"/>
+
+            {isAuthenticated ? authLinks() : guestLinks()}
         </div>
+
     </div>
 
     );
 }
 
-export default Navbar;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);

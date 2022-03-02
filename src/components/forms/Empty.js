@@ -1,7 +1,5 @@
 import './forms.css';
-import {
-    Outlet
-  } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
   
 
 function Empty() {
