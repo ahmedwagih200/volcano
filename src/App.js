@@ -12,6 +12,8 @@ import "./components/footer/footer.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Provider} from 'react-redux';
 import store from './store';
+import ChangePassword from "./components/forms/ChangePassword";
+import Profile from "./components/forms/Profile";
 
 
 function App() {
@@ -29,7 +31,8 @@ function App() {
                         <Route path="Login" element={<Login/>}/>
                         <Route path="ResetPassword" element={<ResetPassword/>}/>
 
-
+                        <Route path="Profile" element={<Profile/>}/>
+                        <Route path="ChangePassword" element={<ChangePassword/>}/>
                     </Route>
 
                     <Route path="password/reset/confirm/:uid/:token" element={<ResetPasswordConfirm/>}/>
