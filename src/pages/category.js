@@ -23,6 +23,32 @@ function Category() {
   const params = useParams();
   const [cate, set_cate] = useState([]);
   const [cname, set_cname] = useState("");
+<<<<<<< HEAD
+  const [searchText, setSearchText] = useState("");
+  console.log(searchText);
+
+  const location = useLocation();
+  useEffect(() => {
+    axios.get(`http://localhost:8000/category/${params.id}`).then((res) => {
+      set_cate(res.data);
+      console.log(res.data);
+    });
+    axios
+      .get(`http://localhost:8000/cate/${params.id}`)
+      .then((res) => set_cname(res.data.name));
+  }, [location]);
+
+  return (
+    <div className="container mt-5">
+      <div style={{ textAlign: "right" }}>
+        <input onChange={(e) => setSearchText(e.target.value)} type="text" />
+        <button onClick={(e) => searchText(e)} className="btn btn-info">
+          Search
+        </button>
+      </div>
+      <h2> {cname} </h2>
+
+=======
   const location = useLocation();
   useEffect(() => {
     axios.get(`http://localhost:8000/category/${params.id}`).then((res) => {
@@ -38,6 +64,7 @@ function Category() {
     <div className="container mt-5">
       <h2> {cname} </h2>
 
+>>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
       <div className="row mx-5">
         <div className="col-3 my-4">
           <div className="list-group">
@@ -88,6 +115,31 @@ function Category() {
 
         <div className="col-9 my-4">
           <div className="row">
+<<<<<<< HEAD
+            {cate
+              .filter((val) => {
+                if (searchText === "") {
+                  return val;
+                } else if (
+                  val.name
+                    .toLowerCase()
+                    .includes(searchText.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((product, index) => {
+                return (
+                  <ItemCard
+                    img={`http://localhost:8000${product.image}`}
+                    price={product.price}
+                    title={product.name}
+                    item={product}
+                    key={index}
+                  />
+                );
+              })}
+=======
             {cate.map((product, index) => {
               return (
                 <ItemCard
@@ -99,6 +151,7 @@ function Category() {
                 />
               );
             })}
+>>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
           </div>
         </div>
       </div>

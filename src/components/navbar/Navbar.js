@@ -1,8 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+<<<<<<< HEAD
+import React, { Fragment, useState, useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { checkAuthenticated, load_user, logout } from "../../actions/auth";
+=======
 import React, {Fragment, useState, useEffect} from "react";
 import {Link, Navigate, NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {checkAuthenticated, load_user, logout} from "../../actions/auth";
+>>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
 import "./mystyle.css";
 import AOS from "aos";
 

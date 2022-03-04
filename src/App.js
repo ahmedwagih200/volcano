@@ -10,7 +10,11 @@ import ResetPassword from "./components/forms/ResetPassword";
 import ResetPasswordConfirm from "./components/forms/ResetPasswordConfirm";
 import Signup from "./components/forms/Signup";
 import Activate from "./components/forms/Activate";
+<<<<<<< HEAD
+import Empty from "./components/forms/Empty";
+=======
 import Form_container from "./components/forms/Form_container";
+>>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
 import Main from "./pages/Main";
 import Navbar from "./components/navbar/Navbar";
 import "./style.css";
@@ -23,7 +27,10 @@ import Profile from "./components/forms/Profile";
 import { CartProvider } from "react-use-cart";
 import Category from "./pages/category";
 import Cart from "./pages/Cart";
+<<<<<<< HEAD
+=======
 import Reviews from "./components/reviews/Reviews";
+>>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
 function App() {
   return (
     <Provider store={store}>
@@ -34,7 +41,11 @@ function App() {
             <Route path="Main" element={<Main />} />
             <Route path="category/:id" element={<Category />} />
 
+<<<<<<< HEAD
+            <Route path="Empty" element={<Empty />}>
+=======
             <Route path="Form_container" element={<Form_container />}>
+>>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
               <Route path="Signup" element={<Signup />} />
               <Route path="Login" element={<Login />} />
               <Route path="ResetPassword" element={<ResetPassword />} />
@@ -50,7 +61,10 @@ function App() {
             <Route path="activate/:uid/:token" element={<Activate />} />
             <Route path="" element={<Navigate to="/Main" />} />
             <Route path="Cart" element={<Cart />} />
+<<<<<<< HEAD
+=======
             <Route path="Reviews" element={<Reviews />} />
+>>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
           </Routes>
         </Router>
       </CartProvider>
