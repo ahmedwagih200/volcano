@@ -157,11 +157,16 @@ const Profile = () => {
                     />
                 </div>
 
-                <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3" type='submit'>Update</button>
+                <div className="d-flex">
+
+                    <button style={{ marginLeft: '5px' }} className="btn btn-rounded s mt-3 " type='submit'>Update</button>
+
+                    <Link style={{ marginLeft: '5px' }}
+                          className="btn btn-rounded mt-3 s" to='/Form_container/ChangePassword'>Change Password</Link>
+
+                </div>
 
             </form>
-
-            <Link to='/Form_container/ChangePassword'>Change Password</Link>
 
         </div>
     );

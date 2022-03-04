@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {Fragment, useState, useEffect} from "react";
-import {Link, Navigate, NavLink} from "react-router-dom";
+import {Link, Navigate, NavLink, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {checkAuthenticated, load_user, logout} from "../../actions/auth";
 import "./mystyle.css";
@@ -15,6 +15,8 @@ import {useCart} from "react-use-cart";
 function Navbar({logout, isAuthenticated}) {
 
     AOS.init();
+
+    let navigate = useNavigate();
     const [redirect, setRedirect] = useState(false);
     const {totalItems} = useCart();
 
@@ -25,7 +27,7 @@ function Navbar({logout, isAuthenticated}) {
 
     const logout_user = () => {
         logout();
-        setRedirect(true);
+        return navigate("/Form_container/Login");
     };
 
     const guestLinks = () =>
@@ -50,13 +52,13 @@ function Navbar({logout, isAuthenticated}) {
                         <div className="row justify-content-center ">
                             <Navlink name="Home" val="Main"/>
                             <Navitem name="Menu" val="Main#menu"/>
+                            <Navitem name="About" val="Main#about"/>
 
                             <div style={{marginRight: "-50px", marginLeft: "-50px", marginTop: "-20px", marginBottom: "-20px",
                                 transform: "scale(0.6)",}} className="col-md-auto navbar-header">
                                 <img src={logo} alt="logo"/>
                             </div>
 
-                            <Navitem name="About" val="Main#about"/>
                             <Navitem name="Contact" val="Main#contact"/>
                             <Navlink name="Reviews" val="Reviews"/>
 

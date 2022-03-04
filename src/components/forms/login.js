@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Login = ({ login, isAuthenticated }) => {
@@ -9,6 +11,7 @@ const Login = ({ login, isAuthenticated }) => {
         email: '',
         password: ''
     });
+
 
     const { email, password } = formData;
 
@@ -53,15 +56,17 @@ const Login = ({ login, isAuthenticated }) => {
                         required
                     />
                 </div>
-                <button style={{marginRight: '6px'}} className="btn btn-dark mt-3" type="submit">Login</button>
+                <button style={{marginRight: '6px' , width: '70px'}} className="btn btn-dark mt-3 s" type="submit">Login</button>
             </form>
 
-            <p className='mt-3'>
+            <p className='mt-3 '>
                 Don't have an account? <Link to='/Form_container/Signup'>Sign Up</Link>
             </p>
             <p className='mt-3'>
                 Forgot your Password? <Link to='/Form_container/ResetPassword'>Reset Password</Link>
             </p>
+            <ToastContainer/>
+
         </div>
     );
 };

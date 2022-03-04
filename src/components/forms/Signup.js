@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../../actions/auth';
+import {ToastContainer} from "react-toastify";
 
 const Signup = ({ signup, isAuthenticated }) => {
     const [accountCreated, setAccountCreated] = useState(false);
@@ -31,9 +32,6 @@ const Signup = ({ signup, isAuthenticated }) => {
 
     if (isAuthenticated) {
         return <Navigate to='/' />
-    }
-    if (accountCreated) {
-        return <Navigate to='/Form_container/Login' />
     }
 
     return (
@@ -121,14 +119,16 @@ const Signup = ({ signup, isAuthenticated }) => {
                     />
                 </div>
 
-                <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3" type='submit'>Register</button>
+                <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3 s" type='submit'>Register</button>
             </form>
 
             <br />
 
+
             <p className='mt-3'>
                 Already have an account? <Link to='/Form_container/Login'>Sign In</Link>
             </p>
+            <ToastContainer/>
         </div>
     );
 };

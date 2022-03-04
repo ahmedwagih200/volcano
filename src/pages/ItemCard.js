@@ -21,7 +21,7 @@ const ItemsCard = (props) => {
                     <h5 className="card">${props.price}</h5>
                     <div>
                         <button
-                            className="btn btn-success"
+                            className="btn btn-dark mt-3"
                             onClick={() => {
                                 addItem(props.item);
                                 notify();

@@ -24,6 +24,8 @@ import { CartProvider } from "react-use-cart";
 import Category from "./pages/category";
 import Cart from "./pages/Cart";
 import Reviews from "./components/reviews/Reviews";
+import MakeReview from "./components/reviews/MakeReview";
+
 function App() {
   return (
     <Provider store={store}>
@@ -51,6 +53,7 @@ function App() {
             <Route path="" element={<Navigate to="/Main" />} />
             <Route path="Cart" element={<Cart />} />
             <Route path="Reviews" element={<Reviews />} />
+            <Route path="MakeReview" element={<MakeReview />} />
           </Routes>
         </Router>
       </CartProvider>
