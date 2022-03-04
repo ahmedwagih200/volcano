@@ -57,10 +57,10 @@ const Login = ({ login, isAuthenticated }) => {
             </form>
 
             <p className='mt-3'>
-                Don't have an account? <Link to='/Empty/Signup'>Sign Up</Link>
+                Don't have an account? <Link to='/Form_container/Signup'>Sign Up</Link>
             </p>
             <p className='mt-3'>
-                Forgot your Password? <Link to='/Empty/ResetPassword'>Reset Password</Link>
+                Forgot your Password? <Link to='/Form_container/ResetPassword'>Reset Password</Link>
             </p>
         </div>
     );
