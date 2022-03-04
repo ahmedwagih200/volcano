@@ -23,6 +23,9 @@ function Category() {
   const params = useParams();
   const [cate, set_cate] = useState([]);
   const [cname, set_cname] = useState("");
+  const [searchText, setSearchText] = useState("");
+  console.log(searchText);
+
   const location = useLocation();
   useEffect(() => {
     axios.get(`http://localhost:8000/category/${params.id}`).then((res) => {
@@ -36,6 +39,12 @@ function Category() {
 
   return (
     <div className="container mt-5">
+      <div style={{ textAlign: "right" }}>
+        <input onChange={(e) => setSearchText(e.target.value)} type="text" />
+        <button onClick={(e) => searchText(e)} className="btn btn-info">
+          Search
+        </button>
+      </div>
       <h2> {cname} </h2>
 
       <div className="row mx-5">
@@ -88,17 +97,29 @@ function Category() {
 
         <div className="col-9 my-4">
           <div className="row">
-            {cate.map((product, index) => {
-              return (
-                <ItemCard
-                  img={`http://localhost:8000${product.image}`}
-                  price={product.price}
-                  title={product.name}
-                  item={product}
-                  key={index}
-                />
-              );
-            })}
+            {cate
+              .filter((val) => {
+                if (searchText === "") {
+                  return val;
+                } else if (
+                  val.name
+                    .toLowerCase()
+                    .includes(searchText.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((product, index) => {
+                return (
+                  <ItemCard
+                    img={`http://localhost:8000${product.image}`}
+                    price={product.price}
+                    title={product.name}
+                    item={product}
+                    key={index}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>
