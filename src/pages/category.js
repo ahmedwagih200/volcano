@@ -42,7 +42,7 @@ function Category() {
     <div className="container mt-5">
       <div style={{ textAlign: "right" }}>
         <input onChange={(e) => setSearchText(e.target.value)} type="text" />
-        <button onClick={(e) => searchProduct(e)} className="btn btn-info">
+        <button onClick={(e) => searchText(e)} className="btn btn-info">
           Search
         </button>
       </div>
