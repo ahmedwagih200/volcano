@@ -10,7 +10,7 @@ import ResetPassword from "./components/forms/ResetPassword";
 import ResetPasswordConfirm from "./components/forms/ResetPasswordConfirm";
 import Signup from "./components/forms/Signup";
 import Activate from "./components/forms/Activate";
-import Empty from "./components/forms/Empty";
+import Form_container from "./components/forms/Form_container";
 import Main from "./pages/Main";
 import Navbar from "./components/navbar/Navbar";
 import "./style.css";
@@ -23,6 +23,7 @@ import Profile from "./components/forms/Profile";
 import { CartProvider } from "react-use-cart";
 import Category from "./pages/category";
 import Cart from "./pages/Cart";
+import Reviews from "./components/reviews/Reviews";
 function App() {
   return (
     <Provider store={store}>
@@ -33,7 +34,7 @@ function App() {
             <Route path="Main" element={<Main />} />
             <Route path="category/:id" element={<Category />} />
 
-            <Route path="Empty" element={<Empty />}>
+            <Route path="Form_container" element={<Form_container />}>
               <Route path="Signup" element={<Signup />} />
               <Route path="Login" element={<Login />} />
               <Route path="ResetPassword" element={<ResetPassword />} />
@@ -49,6 +50,7 @@ function App() {
             <Route path="activate/:uid/:token" element={<Activate />} />
             <Route path="" element={<Navigate to="/Main" />} />
             <Route path="Cart" element={<Cart />} />
+            <Route path="Reviews" element={<Reviews />} />
           </Routes>
         </Router>
       </CartProvider>

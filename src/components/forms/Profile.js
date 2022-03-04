@@ -161,7 +161,7 @@ const Profile = () => {
 
             </form>
 
-            <Link to='/Empty/ChangePassword'>Change Password</Link>
+            <Link to='/Form_container/ChangePassword'>Change Password</Link>
 
         </div>
     );
