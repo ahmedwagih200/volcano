@@ -33,7 +33,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         return <Navigate to='/' />
     }
     if (accountCreated) {
-        return <Navigate to='/Empty/Login' />
+        return <Navigate to='/Form_container/Login' />
     }
 
     return (
@@ -127,7 +127,7 @@ const Signup = ({ signup, isAuthenticated }) => {
             <br />
 
             <p className='mt-3'>
-                Already have an account? <Link to='/Empty/Login'>Sign In</Link>
+                Already have an account? <Link to='/Form_container/Login'>Sign In</Link>
             </p>
         </div>
     );

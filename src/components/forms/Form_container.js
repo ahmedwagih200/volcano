@@ -2,7 +2,7 @@ import './forms.css';
 import { Outlet } from 'react-router-dom';
   
 
-function Empty() {
+function Form_container() {
   return (
      <div style={{paddingTop: '90px'}} className='forms'>
          
@@ -12,4 +12,4 @@ function Empty() {
   );
 }
 
-export default Empty;
+export default Form_container;
