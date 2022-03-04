@@ -23,7 +23,6 @@ function Category() {
   const params = useParams();
   const [cate, set_cate] = useState([]);
   const [cname, set_cname] = useState("");
-<<<<<<< HEAD
   const [searchText, setSearchText] = useState("");
   console.log(searchText);
 
@@ -48,23 +47,6 @@ function Category() {
       </div>
       <h2> {cname} </h2>
 
-=======
-  const location = useLocation();
-  useEffect(() => {
-    axios.get(`http://localhost:8000/category/${params.id}`).then((res) => {
-      set_cate(res.data);
-      console.log(res.data);
-    });
-    axios
-      .get(`http://localhost:8000/cate/${params.id}`)
-      .then((res) => set_cname(res.data.name));
-  }, [location]);
-
-  return (
-    <div className="container mt-5">
-      <h2> {cname} </h2>
-
->>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
       <div className="row mx-5">
         <div className="col-3 my-4">
           <div className="list-group">
@@ -115,7 +97,6 @@ function Category() {
 
         <div className="col-9 my-4">
           <div className="row">
-<<<<<<< HEAD
             {cate
               .filter((val) => {
                 if (searchText === "") {
@@ -139,19 +120,6 @@ function Category() {
                   />
                 );
               })}
-=======
-            {cate.map((product, index) => {
-              return (
-                <ItemCard
-                  img={`http://localhost:8000${product.image}`}
-                  price={product.price}
-                  title={product.name}
-                  item={product}
-                  key={index}
-                />
-              );
-            })}
->>>>>>> faa68a398d7a212fb7b0584c7089278b8ff26519
           </div>
         </div>
       </div>
