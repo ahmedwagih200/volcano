@@ -22,18 +22,6 @@ function Cart() {
     }
 
 
-  //   const config = {
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `JWT ${localStorage.getItem('access')}`,
-  //         'Accept': 'application/json'
-  //     }
-  // };
-
-  
-  //     const resp = await axios.get(`http://127.0.0.1:8000/auth/users/me/`, config);
-  //     user=resp.data['id']
-
     axios.get(`http://127.0.0.1:8000/auth/users/me/` ,{
       headers: {
         'Authorization': `JWT ${localStorage.getItem('access')}`
@@ -60,10 +48,6 @@ axios.post('http://localhost:8000/order', {
 
 
 })
-
-
-
-
 
 .catch(error => console.err(error))
 
@@ -94,7 +78,7 @@ axios.post('http://localhost:8000/order', {
         <h1 className="text-center"> Your cart isEmpty </h1>
       ) : (
         <section className="container">
-          <div className="row jistufy-content-center">
+          <div className="row justify-content-center">
             <div className="col-12">
               <h5>
                 {" "}

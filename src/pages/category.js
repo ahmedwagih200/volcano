@@ -22,9 +22,12 @@ function Category() {
 
   const params = useParams();
   const [cate, set_cate] = useState([]);
+
   const [arr, set_cname] = useState([]);
   const location = useLocation();
 
+
+  
   useEffect(() => {
     axios.get(`http://localhost:8000/category/${params.id}`).then((res) => {
       set_cate(res.data);
@@ -36,27 +39,32 @@ function Category() {
   }, [location]);
 
   return (
-    <div className="container mt-5">
+    <div className="container-fluid mt-5">
       {/* <h2> {arr[params.id -1 ].name} </h2> */}
 
       <div className="row mx-5">
-        <div className="col-3 my-4">
+        <div className="col-3 my-5 ">
           <div className="list-group">
             {arr.map((c ,index )=>{
               return <Link
               to={`/category/${c.id}`}
-              className="list-group-item list-group-item-action text-center text-capitalize"
+              className="list-group-item list-group-item-action text-center text-capitalize" style={{ height:'70px'}}
             >
-             {c.name}
+              <h4> {c.name} </h4>
+             
             </Link>
 
             })  }
            
+      
+            
           </div>
         </div>
 
-        <div className="col-9 my-4">
+        <div className="col-7 my-5 offset-1" >
           <div className="row">
+
+            
             {cate.map((product, index) => {
               return (
                 <ItemCard
@@ -68,6 +76,7 @@ function Category() {
                 />
               );
             })}
+
           </div>
         </div>
       </div>
