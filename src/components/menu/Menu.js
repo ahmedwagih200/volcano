@@ -1,7 +1,7 @@
 
 
 import {Link } from "react-router-dom"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import axios from 'axios'
 
@@ -22,7 +22,7 @@ function Menu() {
       
         
        return <div className="container mt-5">
-           <h1 className="text-center text-capitalize" > our minu </h1>
+           <h1 className="text-center text-capitalize" > our menu </h1>
         <div className="row mx-5">
             
         

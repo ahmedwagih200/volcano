@@ -141,14 +141,14 @@ export const verify = (uid, token) => async dispatch => {
     }
 };
 
-export const signup = (first_name, last_name, email, address, phone, password, re_password) => async dispatch => {
+export const signup = (first_name, last_name, email, address,building_number,floor_number,apartment_number,landmark, phone, password, re_password) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
 
-    const body = JSON.stringify({ first_name, last_name, email, address, phone, password, re_password });
+    const body = JSON.stringify({ first_name, last_name, email, address,building_number,floor_number,apartment_number,landmark, phone, password, re_password });
 
     try {
         const res = await axios.post(`http://127.0.0.1:8000/auth/users/`, body, config);

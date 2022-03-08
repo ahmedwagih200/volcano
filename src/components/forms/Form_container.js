@@ -1,6 +1,6 @@
 import './forms.css';
 import { Outlet } from 'react-router-dom';
-  
+import React, { Component }  from 'react';
 
 function Form_container() {
   return (
