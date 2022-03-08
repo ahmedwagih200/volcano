@@ -1,4 +1,5 @@
 import { useCart } from "react-use-cart";
+import axios from "axios";
 import {Link, Navigate, NavLink} from "react-router-dom";
 import React, { Component }  from 'react';
 function Cart() {
@@ -12,8 +13,66 @@ function Cart() {
     removeItem,
     emptyCart,
   } = useCart();
+
+
   const buy = () => {
-    alert("تمت العملية بنجاح...");
+    let arr=[]
+    let user
+    for (let itm of items ){
+       arr.push({'id': itm.id , "qty": itm.quantity})
+
+    }
+
+
+    axios.get(`http://127.0.0.1:8000/auth/users/me/` ,{
+      headers: {
+        'Authorization': `JWT ${localStorage.getItem('access')}`
+      }
+  }
+).then(resp => {user=resp.data['id'] ; console.log(user) ;
+
+axios.post('http://localhost:8000/order', {
+      'items': arr,
+      'price': cartTotal,
+      'user':user
+      
+  },
+  {
+      headers: {
+          "Authorization": `AUTHORIZATION_KEY`,
+          "Content-Type": 'application/json'
+      }
+  }
+)
+.then(res => console.log(res))
+.catch(error => console.err(error))
+
+
+
+})
+
+.catch(error => console.err(error))
+
+
+
+//     axios.post('http://localhost:8000/order', {
+//       'items': arr,
+//       'price': cartTotal,
+//       'user':user
+      
+//   },
+//   {
+//       headers: {
+//           "Authorization": `AUTHORIZATION_KEY`,
+//           "Content-Type": 'application/json'
+//       }
+//   }
+// )
+// .then(res => console.log(res))
+// .catch(error => console.err(error))
+
+    // alert("task is done successfully");
+    // console.log(arr , items )
   };
   return (
     <>
@@ -21,7 +80,7 @@ function Cart() {
         <h1 className="text-center"> Your cart isEmpty </h1>
       ) : (
         <section className="container">
-          <div className="row jistufy-content-center">
+          <div className="row justify-content-center">
             <div className="col-12">
               <h5>
                 {" "}

@@ -37,11 +37,12 @@ function Navbar({logout, isAuthenticated}) {
         <div className="d-flex flex-row">
 
             <NavLink style={{fontSize:'20px'}} to="Form_container/Profile" className="col-md-auto nav-link active px-lg-4 rounded">My Profile</NavLink>
+            <NavLink style={{fontSize:'20px'}} to="orders" className="col-md-auto nav-link active px-lg-4 rounded">My Orders</NavLink>
+
             <a style={{fontSize:'20px'}} className="col-md-auto nav-link active px-lg-4 rounded" href="#" onClick={logout_user}>Logout</a>
 
         </div>
     );
-
     return (
 
         <nav className="navbar navbar-light bg-light p-0">
@@ -82,7 +83,7 @@ function Navbar({logout, isAuthenticated}) {
 }
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, {logout})(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

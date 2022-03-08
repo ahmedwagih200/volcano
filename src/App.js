@@ -11,6 +11,8 @@ import ResetPassword from "./components/forms/ResetPassword";
 import ResetPasswordConfirm from "./components/forms/ResetPasswordConfirm";
 import Signup from "./components/forms/Signup";
 import Activate from "./components/forms/Activate";
+
+
 import Form_container from "./components/forms/Form_container";
 import Main from "./pages/Main";
 import Navbar from "./components/navbar/Navbar";
@@ -25,6 +27,10 @@ import Profile from "./components/forms/Profile";
 import { CartProvider } from "react-use-cart";
 import Category from "./pages/category";
 import Cart from "./pages/Cart";
+import Orders from "./pages/orders";
+import Order from "./pages/order";
+
+
 import Reviews from "./components/reviews/Reviews";
 import MakeReview from "./components/reviews/MakeReview";
 
@@ -39,6 +45,13 @@ function App() {
           <Routes>
             <Route path="Main" element={<Main />} />
             <Route path="category/:id" element={<Category />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="order/:id/:cost/:date" element={<Order />}  />
+
+            
+
+           
+
             <Route path="checkout" element={<Home />}/>
             <Route path="change_address" element={<Cheackout_address />} />
             <Route path="Form_container" element={<Form_container />}>
