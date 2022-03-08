@@ -1,10 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import React, { Fragment, useState, useEffect } from "react";
-import { Link, Navigate, NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import { checkAuthenticated, load_user, logout } from "../../actions/auth";
-
+import React, {Fragment, useState, useEffect} from "react";
+import {Link, Navigate, NavLink, useNavigate} from "react-router-dom";
+import {connect} from "react-redux";
+import {checkAuthenticated, load_user, logout} from "../../actions/auth";
 import "./mystyle.css";
 import AOS from "aos";
 
@@ -12,113 +10,76 @@ import "aos/dist/aos.css";
 import Navitem from "./Navitem";
 import Navlink from "./Navlink";
 import logo from "../imgs/stockLogo.jpeg";
-import { useCart } from "react-use-cart";
+import {useCart} from "react-use-cart";
 
-function Navbar({ logout, isAuthenticated }) {
-  AOS.init();
-  const [redirect, setRedirect] = useState(false);
-  const { totalItems } = useCart();
+function Navbar({logout, isAuthenticated}) {
 
-  useEffect(() => {
-    checkAuthenticated();
-    load_user();
-  }, []);
+    AOS.init();
 
-  const logout_user = () => {
-    logout();
-    setRedirect(true);
-  };
+    let navigate = useNavigate();
+    const [redirect, setRedirect] = useState(false);
+    const {totalItems} = useCart();
 
-  const guestLinks = () => (
-    <NavLink
-      to="Form_container/Login"
-      style={{ fontSize: "20px" }}
-      className="col-md-auto nav-link active px-lg-4 rounded"
-    >
-      Login
-    </NavLink>
-  );
+    useEffect(() => {
+        checkAuthenticated();
+        load_user();
+    }, []);
 
-  const authLinks = () => (
-    <div className="d-flex flex-row">
-      <NavLink
-        style={{ fontSize: "20px" }}
-        to="Form_container/Profile"
-        className="col-md-auto nav-link active px-lg-4 rounded"
-      >
-        My Profile
-      </NavLink>
+    const logout_user = () => {
+        logout();
+        return navigate("/Form_container/Login");
+    };
 
-      <NavLink
-        style={{ fontSize: "20px" }}
-        to="orders"
-        className="col-md-auto nav-link active px-lg-4 rounded"
-      >
-        My Orders
-      </NavLink>
-      
-      <a
-        style={{ fontSize: "20px" }}
-        className="col-md-auto nav-link active px-lg-4 rounded"
-        href="#"
-        onClick={logout_user}
-      >
-        Logout
-      </a>
-    </div>
-  );
+    const guestLinks = () =>
+        <NavLink to="Form_container/Login" style={{fontSize:'20px'}} className="col-md-auto nav-link active px-lg-4 rounded">Login</NavLink>
 
-  return (
-    <nav className="navbar navbar-light bg-light p-0">
-      <div className="container-fluid">
-        <div style={{ marginLeft: "30%" }} className="d-flex">
-          <div
-            data-aos="fade-right"
-            data-aos-duration="1500"
-            className=" container-fluid sticky-top bg-light"
-          >
-            <div className="row justify-content-center ">
-              <Navlink name="Home" val="Main" />
-              <Navitem name="Menu" val="Main#menu" />
+    const authLinks = () => (
+        <div className="d-flex flex-row">
 
-              <div
-                style={{
-                  marginRight: "-50px",
-                  marginLeft: "-50px",
-                  marginTop: "-20px",
-                  marginBottom: "-20px",
-                  transform: "scale(0.6)",
-                }}
-                className="col-md-auto navbar-header"
-              >
-                <img src={logo} alt="logo" />
-              </div>
+            <NavLink style={{fontSize:'20px'}} to="Form_container/Profile" className="col-md-auto nav-link active px-lg-4 rounded">My Profile</NavLink>
+            <NavLink style={{fontSize:'20px'}} to="orders" className="col-md-auto nav-link active px-lg-4 rounded">My Orders</NavLink>
 
-              <Navitem name="About" val="Main#about" />
-              <Navitem name="Contact" val="Main#contact" />
-              <Navlink name="Reviews" val="Reviews" />
+            <a style={{fontSize:'20px'}} className="col-md-auto nav-link active px-lg-4 rounded" href="#" onClick={logout_user}>Logout</a>
 
-              <Link
-                style={{ marginTop: "25px", fontSize: "25px" }}
-                className="col-md-auto nav-link active px-lg-4 rounded"
-                to={"/cart"}
-              >
-                <i
-                  className="fas fa-shopping-cart "
-                  style={{ fontSize: "25px" }}
-                />{" "}
-                <span style={{ fontSize: "25px" }}>({totalItems}) </span>
-              </Link>
+        </div>
+    );
+    return (
+
+        <nav className="navbar navbar-light bg-light p-0">
+            <div className="container-fluid">
+                <div style={{marginLeft: "30%"}} className="d-flex">
+                    <div data-aos="fade-right" data-aos-duration="1500" className=" container-fluid sticky-top bg-light">
+
+                        <div className="row justify-content-center ">
+                            <Navlink name="Home" val="Main"/>
+                            <Navitem name="Menu" val="Main#menu"/>
+                            <Navitem name="About" val="Main#about"/>
+
+                            <div style={{marginRight: "-50px", marginLeft: "-50px", marginTop: "-20px", marginBottom: "-20px",
+                                transform: "scale(0.6)",}} className="col-md-auto navbar-header">
+                                <img src={logo} alt="logo"/>
+                            </div>
+
+                            <Navitem name="Contact" val="Main#contact"/>
+                            <Navlink name="Reviews" val="Reviews"/>
+
+                            <Link style={{ marginTop:"25px" ,fontSize:'25px'}}
+                                  className="col-md-auto nav-link active px-lg-4 rounded" to={"/Cart"}>
+                                <i className="fas fa-shopping-cart " style={{fontSize: "25px"}}/>{" "}
+                                <span style={{fontSize: "25px"}}>({totalItems}) </span>
+                            </Link>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div className="d-flex">
+                    {isAuthenticated ? authLinks() : guestLinks()}
+                </div>
             </div>
-          </div>
-        </div>
-
-        <div className="d-flex">
-          {isAuthenticated ? authLinks() : guestLinks()}
-        </div>
-      </div>
-    </nav>
-  );
+        </nav>
+    );
 }
 
 const mapStateToProps = (state) => ({

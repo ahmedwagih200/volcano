@@ -1,5 +1,7 @@
 import { useCart } from "react-use-cart";
 import axios from "axios";
+import {Link, Navigate, NavLink} from "react-router-dom";
+import React, { Component }  from 'react';
 function Cart() {
   const {
     isEmpty,
@@ -123,7 +125,7 @@ axios.post('http://localhost:8000/order', {
                             +{" "}
                           </button>
                           <button
-                            onClick={() => removeItem(item.id)}
+                            onClick={() => removeItem(item.id) }
                             className="btn btn-danger ms-2"
                           >
                             {" "}
@@ -147,9 +149,10 @@ axios.post('http://localhost:8000/order', {
               >
                 Clear Cart
               </button>
-              <button onClick={buy} className="btn btn-primary ms-2">
-                Buy Now{" "}
+              <button   className="btn btn-primary ms-2">
+              <Link to='/checkout'>cheack</Link>
               </button>
+            
             </div>
           </div>
         </section>

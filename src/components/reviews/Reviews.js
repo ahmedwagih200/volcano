@@ -1,24 +1,42 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import axios from "axios";
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
+import { NavLink} from "react-router-dom";
+import {useEffect, useState} from "react";
 import './style.css';
 
 export default function Reviews() {
-    const [value, setValue] = React.useState(2);
+
+    const [reviews, setReviews] = useState([]);
+
+    useEffect(() => {
+
+        axios.get(`http://127.0.0.1:8000/review/get/`).then(res => {
+           setReviews(res.data)
+        })
+
+    }, []);
 
     return (
-        <div className="container-fluid justify-content-center p-4 reviews">
-            <div className="card" style={{width: "50%", marginLeft: "25%"}}>
-                <div className="card-body">
-                    <h4 className="card-title">Customer Name : </h4>
-                    <h4 className="card-title">Overall Rating : <Rating name="read-only" value={value} readOnly size="small"/> </h4>
 
-                    <h4>Review :  Some quick example text to build on the card title and make up the bulk of
-                        the card's content. </h4>
-                </div>
+        <div  className="container-fluid justify-content-center p-4 MakeReviews">
+            <div style={{overflow: "auto" , height: "500px"}}>
+            {reviews.map((rev) => {
+                return (
+                        <div className="card" style={{width: "50%", marginLeft: "25%", marginBottom: "10px"}}>
+                            <div className="card-body">
+                                <h4 className="card-title">Customer Name : {rev.name}</h4>
+                                <h4 className="card-title">Overall Rating :
+                                    <Rating name="read-only" value={rev.rating} readOnly size="small"/> </h4>
+                                <h4>Review :  {rev.content} </h4>
+                            </div>
+                        </div>
+                );
+            })}
             </div>
 
+            <NavLink to="/MakeReview" style={{fontSize:'20px', height: '50px' ,width: '130px' , marginLeft:"45%"}}
+                     className="nav-link active px-lg-4 rounded">Make Review</NavLink>
         </div>
     );
 }

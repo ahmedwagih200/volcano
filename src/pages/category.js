@@ -1,6 +1,6 @@
 import { useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ItemCard from "./ItemCard";
 import { useCart } from "react-use-cart";
@@ -22,6 +22,9 @@ function Category() {
 
   const params = useParams();
   const [cate, set_cate] = useState([]);
+  
+  const [searchText, setSearchText] = useState("");
+  console.log(searchText);
 
   const [arr, set_cname] = useState([]);
   const location = useLocation();
@@ -77,6 +80,29 @@ function Category() {
               );
             })}
 
+            {cate
+              .filter((val) => {
+                if (searchText === "") {
+                  return val;
+                } else if (
+                  val.name
+                    .toLowerCase()
+                    .includes(searchText.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((product, index) => {
+                return (
+                  <ItemCard
+                    img={`http://localhost:8000${product.image}`}
+                    price={product.price}
+                    title={product.name}
+                    item={product}
+                    key={index}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>

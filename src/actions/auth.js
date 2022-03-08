@@ -16,6 +16,8 @@ import {
     ACTIVATION_FAIL,
     LOGOUT
 } from './types';
+import {toast} from "react-toastify";
+
 
 export const load_user = () => async dispatch => {
     if (localStorage.getItem('access')) {
@@ -62,9 +64,19 @@ export const login = (email, password) => async dispatch => {
             type: LOGIN_SUCCESS,
             payload: res.data
         });
-
         dispatch(load_user());
+
     } catch (err) {
+        toast.error('No active account found with the given credentials', {
+            position: "bottom-center",
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark"
+        });
         dispatch({
             type: LOGIN_FAIL
         })
@@ -129,14 +141,14 @@ export const verify = (uid, token) => async dispatch => {
     }
 };
 
-export const signup = (first_name, last_name, email, address, phone, password, re_password) => async dispatch => {
+export const signup = (first_name, last_name, email, address,building_number,floor_number,apartment_number,landmark, phone, password, re_password) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
 
-    const body = JSON.stringify({ first_name, last_name, email, address, phone, password, re_password });
+    const body = JSON.stringify({ first_name, last_name, email, address,building_number,floor_number,apartment_number,landmark, phone, password, re_password });
 
     try {
         const res = await axios.post(`http://127.0.0.1:8000/auth/users/`, body, config);
@@ -146,7 +158,20 @@ export const signup = (first_name, last_name, email, address, phone, password, r
             payload: res.data
         });
     } catch (err) {
-        console.log(err)
+
+        for (let error in err.response.data) {
+
+            toast.error(""+err.response.data[error], {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark"
+            });
+        }
         dispatch({
             type: SIGNUP_FAIL
         })

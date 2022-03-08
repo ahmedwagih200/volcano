@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './mystyle.css';
+import React, { Component }  from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 
 function Navbaritem(props) {
