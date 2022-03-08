@@ -16,7 +16,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         re_password: ''
     });
 
-    const { first_name, last_name, email, address, phone, password, re_password } = formData;
+    const { first_name, last_name, email,address,phone, password, re_password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -83,6 +83,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                         required
                     />
                 </div>
+        
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
