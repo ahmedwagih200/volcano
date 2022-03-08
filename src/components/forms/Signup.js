@@ -15,7 +15,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         re_password: ''
     });
 
-    const { first_name, last_name, email, address, phone, password, re_password } = formData;
+    const { first_name, last_name, email,address,phone, password, re_password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -85,6 +85,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                         required
                     />
                 </div>
+        
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
@@ -96,31 +97,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                         required
                     />
                 </div>
-                <div style={{ margin: '5px' }} className='form-group'>
-                    <input
-                        className='form-control'
-                        type='password'
-                        placeholder='Password'
-                        name='password'
-                        value={password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-                <div style={{ margin: '5px' }} className='form-group'>
-                    <input
-                        className='form-control'
-                        type='password'
-                        placeholder='Confirm Password'
-                        name='re_password'
-                        value={re_password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-
+             
                 <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3" type='submit'>Register</button>
             </form>
 

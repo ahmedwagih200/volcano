@@ -3,6 +3,8 @@ import {useCart} from "react-use-cart";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+
 const ItemsCard = (props) => {
     const {addItem} = useCart();
     const notify = () => toast(`${props.title} has been added to your cart`);

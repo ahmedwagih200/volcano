@@ -1,5 +1,5 @@
 import '../about/about.css';
-
+import React, { Component }  from 'react';
 function About() {
   return (
     <div data-aos="fade" data-aos-duration="1000" className="about" style={{backgroundColor: '#ffffff', padding:'10px'}} >

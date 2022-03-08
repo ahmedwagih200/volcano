@@ -61,7 +61,7 @@ function Navbar({logout, isAuthenticated}) {
                             <Navlink name="Reviews" val="Reviews"/>
 
                             <Link style={{ marginTop:"25px" ,fontSize:'25px'}}
-                                  className="col-md-auto nav-link active px-lg-4 rounded" to={"/cart"}>
+                                  className="col-md-auto nav-link active px-lg-4 rounded" to={"/Cart"}>
                                 <i className="fas fa-shopping-cart " style={{fontSize: "25px"}}/>{" "}
                                 <span style={{fontSize: "25px"}}>({totalItems}) </span>
                             </Link>

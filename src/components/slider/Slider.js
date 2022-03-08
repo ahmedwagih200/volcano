@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../slider/slider.css';
-
+import React, { Component }  from 'react';
 function Slider() {
   return (
     <div data-aos="fade-right" data-aos-duration="1500" className="cake">

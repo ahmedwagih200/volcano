@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -15,6 +16,7 @@ import Main from "./pages/Main";
 import Navbar from "./components/navbar/Navbar";
 import "./style.css";
 import "./components/footer/footer.css";
+import './components/checkout/checkout.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -24,6 +26,8 @@ import { CartProvider } from "react-use-cart";
 import Category from "./pages/category";
 import Cart from "./pages/Cart";
 import Reviews from "./components/reviews/Reviews";
+import Home from "./components/checkout/checkout";
+import Cheackout_address from "./components/checkout/change address_checkout";
 function App() {
   return (
     <Provider store={store}>
@@ -33,12 +37,13 @@ function App() {
           <Routes>
             <Route path="Main" element={<Main />} />
             <Route path="category/:id" element={<Category />} />
-
+            <Route path="checkout" element={<Home />}/>
+            <Route path="change_address" element={<Cheackout_address />} />
             <Route path="Form_container" element={<Form_container />}>
               <Route path="Signup" element={<Signup />} />
               <Route path="Login" element={<Login />} />
               <Route path="ResetPassword" element={<ResetPassword />} />
-
+               
               <Route path="Profile" element={<Profile />} />
               <Route path="ChangePassword" element={<ChangePassword />} />
             </Route>
