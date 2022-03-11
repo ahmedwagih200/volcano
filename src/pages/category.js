@@ -23,8 +23,8 @@ function Category() {
   const params = useParams();
   const [cate, set_cate] = useState([]);
   
-  const [searchText, setSearchText] = useState("");
-  console.log(searchText);
+  // const [searchText, setSearchText] = useState("");
+  // console.log(searchText);
 
   const [arr, set_cname] = useState([]);
   const location = useLocation();
@@ -80,7 +80,7 @@ function Category() {
               );
             })}
 
-            {cate
+            {/* {cate
               .filter((val) => {
                 if (searchText === "") {
                   return val;
@@ -102,7 +102,7 @@ function Category() {
                     key={index}
                   />
                 );
-              })}
+              })} */}
           </div>
         </div>
       </div>
