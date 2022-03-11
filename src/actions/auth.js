@@ -160,7 +160,6 @@ export const signup = (first_name, last_name, email, address,building_number,flo
     } catch (err) {
 
         for (let error in err.response.data) {
-
             toast.error(""+err.response.data[error], {
                 position: "bottom-center",
                 autoClose: 5000,

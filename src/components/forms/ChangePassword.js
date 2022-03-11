@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
 import axios from "axios";
+import {toast, ToastContainer} from "react-toastify";
 
 const ChangePassword = () => {
 
@@ -29,15 +29,45 @@ const ChangePassword = () => {
             const body = JSON.stringify({ new_password, re_new_password , current_password});
 
             axios.post("http://127.0.0.1:8000/auth/users/set_password/",body ,config)
-                .then(res=> {
-
-
+                .then(()=> {
+                    toast.success("Password Has Been Changed", {
+                        position: "bottom-center",
+                        autoClose: 2000,
+                        hideProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "dark"
+                    });
 
                 }) .catch(error => {
-                console.log(error.response.data.current_password[0])
+
+                toast.error("Current Password Is "+error.response.data.current_password[0], {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "dark"
+                });
+
             })
 
         }else{
+
+            toast.error("Passwords Must Be The Same", {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "dark"
+            });
 
         }
     };
@@ -89,7 +119,7 @@ const ChangePassword = () => {
 
                 <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3" type='submit'>Change</button>
             </form>
-
+            <ToastContainer/>
         </div>
     );
 };

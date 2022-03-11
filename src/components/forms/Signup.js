@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../../actions/auth';
-import {ToastContainer} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 const Signup = ({ signup, isAuthenticated }) => {
     const [accountCreated, setAccountCreated] = useState(false);
@@ -26,6 +26,17 @@ const Signup = ({ signup, isAuthenticated }) => {
         if (password === re_password) {
             signup(first_name, last_name, email, address, phone, password, re_password);
             setAccountCreated(true);
+        }else{
+            toast.error("Passwords Must be The same", {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark"
+            });
         }
     };
 
@@ -35,7 +46,7 @@ const Signup = ({ signup, isAuthenticated }) => {
     }
 
     return (
-        <div style={{ width: '30%' }} className='container mt-5'>
+        <div style={{ width: '30%' }} className='container mt-2'>
             <h1>Sign Up</h1>
             <p>Create your Account</p>
             <form onSubmit={e => onSubmit(e)}>
@@ -47,9 +58,9 @@ const Signup = ({ signup, isAuthenticated }) => {
                         name='first_name'
                         value={first_name}
                         onChange={e => onChange(e)}
-                        required
-                    />
+                        required/>
                 </div>
+
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
@@ -58,9 +69,9 @@ const Signup = ({ signup, isAuthenticated }) => {
                         name='last_name'
                         value={last_name}
                         onChange={e => onChange(e)}
-                        required
-                    />
+                        required/>
                 </div>
+
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
@@ -69,9 +80,9 @@ const Signup = ({ signup, isAuthenticated }) => {
                         name='email'
                         value={email}
                         onChange={e => onChange(e)}
-                        required
-                    />
+                        required/>
                 </div>
+
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
@@ -80,10 +91,10 @@ const Signup = ({ signup, isAuthenticated }) => {
                         name='phone'
                         value={phone}
                         onChange={e => onChange(e)}
-                        required
-                    />
+                        required/>
                 </div>
-        
+
+
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
@@ -92,9 +103,9 @@ const Signup = ({ signup, isAuthenticated }) => {
                         name='address'
                         value={address}
                         onChange={e => onChange(e)}
-                        required
-                    />
+                        required/>
                 </div>
+
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
@@ -104,9 +115,9 @@ const Signup = ({ signup, isAuthenticated }) => {
                         value={password}
                         onChange={e => onChange(e)}
                         minLength='6'
-                        required
-                    />
+                        required/>
                 </div>
+
                 <div style={{ margin: '5px' }} className='form-group'>
                     <input
                         className='form-control'
@@ -116,20 +127,21 @@ const Signup = ({ signup, isAuthenticated }) => {
                         value={re_password}
                         onChange={e => onChange(e)}
                         minLength='6'
-                        required
-                    />
+                        required/>
                 </div>
 
-                <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3 s" type='submit'>Register</button>
+                <div className="d-flex">
+
+                    <button style={{ marginLeft: '5px' }} className="btn btn-dark mt-3 s" type='submit'>Register</button>
+
+                    <Link style={{ marginLeft: '5px' }}
+                          className="btn btn-rounded mt-3 s" to='/Form_container/Login'>Already have an account ?</Link>
+                </div>
+
             </form>
 
-            <br />
-
-
-            <p className='mt-3'>
-                Already have an account? <Link to='/Form_container/Login'>Sign In</Link>
-            </p>
             <ToastContainer/>
+
         </div>
     );
 };
