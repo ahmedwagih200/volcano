@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {checkAuthenticated, load_user, logout} from "../../actions/auth";
 import "./mystyle.css";
 import AOS from "aos";
-
 import "aos/dist/aos.css";
 import Navitem from "./Navitem";
 import Navlink from "./Navlink";
