@@ -15,8 +15,45 @@ function Cart() {
     emptyCart,
   } = useCart();
 
-  console.log(items)
+
+  const buy1 = () => {
+    let arr=[]
     let user
+    for (let itm of items ){
+       arr.push({'id': itm.id , "qty": itm.quantity})
+
+    }
+
+
+    axios.get(`http://127.0.0.1:8000/auth/users/me/` ,{
+      headers: {
+        'Authorization': `JWT ${localStorage.getItem('access')}`
+      }
+  }
+).then(resp => {user=resp.data['id'] ; console.log(user) ;
+
+axios.post('http://localhost:8000/order', {
+      'items': arr,
+      'price': cartTotal,
+      'user':user
+      
+  },
+  {
+      headers: {
+          "Authorization": `AUTHORIZATION_KEY`,
+          "Content-Type": 'application/json'
+      }
+  }
+)
+.then(res => console.log(res))
+.catch(error => console.log(error))
+
+})
+
+.catch(error => console.log(error))  }
+
+  console.log(items)
+    let user1
   const buy = () => {
 
       axios.post('http://localhost:8000/api/stripe/create-checkout-session', {

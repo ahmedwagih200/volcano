@@ -22,13 +22,13 @@ export default function Order(){
 <div className="col-auto ms-auto mt-2">
                 
                 <h5 className="text-danger"> Order ID: {params.id} </h5>
-                <h5 className="text-danger"> Order Date: {params.date} </h5>
+                
                 
               </div>
 
 
-      <table className="table table-light mt-4" >
-           <thead    >
+      <table className="table  mt-4" >
+           <thead  className="table-dark"  >
                <th> </th>
                <th> Product name </th>
                <th> Price per unit </th>
@@ -36,7 +36,7 @@ export default function Order(){
                <th> Total Price  </th>
 
            </thead>
-           <tbody style={{ color: '#917c36'}} >
+           <tbody style={{ color: '#917c36'}} className="table-light" >
                { 
                  items.map((itm , index)=>{
                     return  <tr>

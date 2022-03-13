@@ -23,6 +23,8 @@ const Checkout = ({login, isAuthenticated}) => {
 
     let navigate = useNavigate();
 
+    
+
     useEffect(() => {
 
         checkAuthenticated();
@@ -53,11 +55,13 @@ const Checkout = ({login, isAuthenticated}) => {
     const {email, password} = formData;
 
     const { address, phone } = userData;
+    localStorage.setItem('address' , address) ;
+    localStorage.setItem('phone' , phone) ;
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    const onUserChange = e => setUserData({...userData, [e.target.name]: e.target.value});
-
+    const onUserChange = e =>{ setUserData({...userData, [e.target.name]: e.target.value}); localStorage.setItem(e.target.name, e.target.value);} 
+  
     const onSubmit = e => {
         e.preventDefault();
 
@@ -87,6 +91,46 @@ const Checkout = ({login, isAuthenticated}) => {
     };
 
     const saveOrder_COD = () => {
+        
+            let arr=[]
+            let user
+            for (let itm of items ){
+               arr.push({'id': itm.id , "qty": itm.quantity})
+        
+            }        
+        
+            axios.get(`http://127.0.0.1:8000/auth/users/me/` ,{
+              headers: {
+                'Authorization': `JWT ${localStorage.getItem('access')}`
+              }
+          }
+        ).then(resp => {user=resp.data['id'] ; console.log(user) ;
+        
+        axios.post('http://localhost:8000/order', {
+              'items': arr,
+              'price': cartTotal,
+              'user':user ,
+              'address':address, 
+              'phone':phone ,
+              'cash':visible,
+              
+
+              
+          },
+          {
+              headers: {
+                  "Authorization": `AUTHORIZATION_KEY`,
+                  "Content-Type": 'application/json'
+              }
+          }
+        )
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+        
+        })
+        
+        .catch(error => console.log(error))  
+        
 
         // save order data To DB
 
@@ -191,7 +235,7 @@ const Checkout = ({login, isAuthenticated}) => {
                         <Grid container spacing={1} >
                             <Grid item xs={1} className='pt-3'>
 
-                                <input type="radio" name="pay" value="cash" className='big' onClick={ ()=>setVisible(true)} onChange={()=>setVisible1(false)} />
+                                <input type="radio" name="pay" value="cash" className='big' onClick={ ()=>{setVisible(true)  ; localStorage.setItem('cash', true)}} onChange={()=>setVisible1(false)} />
                             </Grid>
 
                             <Grid item xs={1} className='pr-5'>
@@ -207,7 +251,7 @@ const Checkout = ({login, isAuthenticated}) => {
 
                         <Grid container spacing={1} >
                             <Grid item xs={1} className='pt-3'>
-                                <input type="radio" name="pay" value="visa" className='big' onClick={ ()=>setVisible1(true)}  onChange={()=>setVisible(false)}  />
+                                <input type="radio" name="pay" value="visa" className='big' onClick={ ()=>setVisible1(true)}  onChange={()=>{setVisible(false) ; localStorage.setItem('cash', false)}}  />
 
                             </Grid>
 

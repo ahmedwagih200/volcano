@@ -23,11 +23,14 @@ function Category() {
   const params = useParams();
   const [cate, set_cate] = useState([]);
   
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
+  // console.log(searchText);
 
   const [arr, set_cname] = useState([]);
   const location = useLocation();
 
+
+  
   useEffect(() => {
     axios.get(`http://localhost:8000/category/${params.id}`).then((res) => {
       set_cate(res.data);
@@ -55,13 +58,16 @@ function Category() {
             </Link>
 
             })  }
-
+           
+      
+            
           </div>
         </div>
 
         <div className="col-7 my-5 offset-1" >
           <div className="row">
 
+            
             {cate.map((product, index) => {
               return (
                 <ItemCard
@@ -74,6 +80,29 @@ function Category() {
               );
             })}
 
+            {/* {cate
+              .filter((val) => {
+                if (searchText === "") {
+                  return val;
+                } else if (
+                  val.name
+                    .toLowerCase()
+                    .includes(searchText.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((product, index) => {
+                return (
+                  <ItemCard
+                    img={`http://localhost:8000${product.image}`}
+                    price={product.price}
+                    title={product.name}
+                    item={product}
+                    key={index}
+                  />
+                );
+              })} */}
           </div>
         </div>
       </div>

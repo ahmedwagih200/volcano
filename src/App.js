@@ -29,7 +29,7 @@ import Category from "./pages/category";
 import Cart from "./pages/Cart";
 import Orders from "./pages/orders";
 import Order from "./pages/order";
-
+import Status from "./pages/status";
 
 import Reviews from "./components/reviews/Reviews";
 import MakeReview from "./components/reviews/MakeReview";
@@ -52,7 +52,7 @@ function App() {
             <Route path="order/:id/:cost/:date" element={<Order />}  />
             <Route path="checkout" element={<Home />}/>
             <Route path="change_address" element={<Cheackout_address />} />
-
+            <Route path="status/:id/:ord" element={<Status />}  />
 
             <Route path="Form_container" element={<Form_container />}>
               <Route path="Signup" element={<Signup />} />
