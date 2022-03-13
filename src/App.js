@@ -29,14 +29,16 @@ import Category from "./pages/category";
 import Cart from "./pages/Cart";
 import Orders from "./pages/orders";
 import Order from "./pages/order";
-
+import Status from "./pages/status";
 
 import Reviews from "./components/reviews/Reviews";
 import MakeReview from "./components/reviews/MakeReview";
 
 import Home from "./components/checkout/checkout";
 import Cheackout_address from "./components/checkout/change address_checkout";
+
 function App() {
+
   return (
     <Provider store={store}>
       <CartProvider>
@@ -44,21 +46,18 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="Main" element={<Main />} />
+            <Route path="/" element={<Main />} />
             <Route path="category/:id" element={<Category />} />
             <Route path="orders" element={<Orders />} />
             <Route path="order/:id/:cost/:date" element={<Order />}  />
-
-            
-
-           
-
             <Route path="checkout" element={<Home />}/>
             <Route path="change_address" element={<Cheackout_address />} />
+            <Route path="status/:id/:ord" element={<Status />}  />
+
             <Route path="Form_container" element={<Form_container />}>
               <Route path="Signup" element={<Signup />} />
               <Route path="Login" element={<Login />} />
               <Route path="ResetPassword" element={<ResetPassword />} />
-               
               <Route path="Profile" element={<Profile />} />
               <Route path="ChangePassword" element={<ChangePassword />} />
             </Route>
@@ -70,6 +69,7 @@ function App() {
             <Route path="activate/:uid/:token" element={<Activate />} />
             <Route path="" element={<Navigate to="/Main" />} />
             <Route path="Cart" element={<Cart />} />
+
             <Route path="Reviews" element={<Reviews />} />
             <Route path="MakeReview" element={<MakeReview />} />
           </Routes>

@@ -5,15 +5,68 @@ table.table td a.view i {
     margin: 2px 0 0 1px;
 }   
 
-.custom-modal {
-    width: 75% ;
-   
+.custom-dialog { width: 90%; }
 
+
+ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3.5em;
+}
+
+
+ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+
+
+ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+ol.progtrckr li.progtrckr-todo {
+    color: silver; 
+    border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 2.2em;
+    width: 2.2em;
+    line-height: 2.2em;
+    border: none;
+    border-radius: 2.2em;
+}
+ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 2.2em;
+    bottom: -1.2em;
 }
 
 
 
-.card {
+
+
+
+/* .card {
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -30,7 +83,7 @@ table.table td a.view i {
     border-radius: 0.10rem
 }
 
-.card-header:first-child {
+/* .card-header:first-child {
     border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
 }
 
@@ -39,9 +92,9 @@ table.table td a.view i {
     margin-bottom: 0;
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-}
+} */
 
-.track {
+/* .track {
     position: relative;
     background-color: #ddd;
     height: 7px;
@@ -100,14 +153,14 @@ table.table td a.view i {
 }
 
 .track .step.active .text {
-    font-weight: 50;
+    font-weight: 30;
     color: #000
 }
 
 .track .text {
-    /* display: block; */
+    display: block; 
     margin-top: 7px ;
-    font-size: 18px;
+     font-size: 18px; 
 }
 
 .btn-warning {
@@ -115,5 +168,6 @@ table.table td a.view i {
     background-color: #ee5435;
     border-color: #ee5435;
     border-radius: 1px
-}
+}  */
+
 

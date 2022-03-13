@@ -1,28 +1,16 @@
-
-
-import {Link } from "react-router-dom"
-import React, { useEffect, useState } from "react"
-
+import {Link} from "react-router-dom"
+import React, {useEffect, useState} from "react"
 import axios from 'axios'
 
-
-
-
-
 function Menu() {
-    const [cate , set_cate] = useState([])
-         
-      useEffect(()=>{
-    
-              axios.get('http://localhost:8000/categories').then(res=> set_cate(res.data)  )
-    
-    
-      } ,[])
-    
-      
-        
-       return <div className="container mt-5">
-           <h1 className="text-center text-capitalize" > our menu </h1>
+    const [cate, set_cate] = useState([])
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/categories').then(res => set_cate(res.data))
+    }, [])
+
+    return <div id="menu" className=" container mt-5">
+        <h1 className="text-center text-capitalize"> our menu </h1>
         <div className="row mx-5">
             
         

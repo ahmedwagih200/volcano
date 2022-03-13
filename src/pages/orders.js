@@ -6,15 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 export default function Orders(){
 
     const [orders, set_orders] = useState([]);
-    const [showModal, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-     
     
-    
-
     useEffect(()=>{
         let user
     axios.get(`http://127.0.0.1:8000/auth/users/me/` ,{
@@ -37,6 +29,7 @@ axios.get(`http://127.0.0.1:8000/orders/${user}`).then(res=>set_orders(res.data)
             <thead className="table-dark bg-dark">
                 <th> Order ID </th>
                 <th> Order Date </th>
+
                 <th> Address </th>                
                 <th> Order Cost </th>
                 <th> Payment Type </th>
@@ -44,7 +37,7 @@ axios.get(`http://127.0.0.1:8000/orders/${user}`).then(res=>set_orders(res.data)
                 <th>  </th> 
 
             </thead>
-            <tbody  >
+            <tbody  className="table-light"  >
             { 
           orders.map((o , index)=>{
               return<>
@@ -53,14 +46,14 @@ axios.get(`http://127.0.0.1:8000/orders/${user}`).then(res=>set_orders(res.data)
                 <td> {o.date}</td>
                 <td> {o.address}</td>
                 <td>{o.total } EGP</td>
-                <td> {o.payment}</td>
+                <td className="text-capitalize" > {o.payment}</td>
                 <td>
                     {/* <Button data-toggle="modal" data-target={`#ord${index}`} className="view"><i className="material-icons">&#xE5C8;</i></Button></td>
                                      */}
-                    <Button className="view" onClick={handleShow} > <i className="material-icons">&#xE5C8;</i>    </Button> </td>
+                    <Link to={`/status/${o.state}/${o.id}`} className="view"  > <i className="material-icons">&#xE5C8;</i>    </Link> </td>
 
                 <td>
-                    <Link  to={`/order/${o.id}/${o.total}/${o.date}`} className="btn btn-dark btn-lg"  >  View Details
+                    <Link  to={`/order/${o.id}/${o.total}/${o.date}`} className="btn btn-dark btn-lg"  >  View Items
 
                     </Link>
 
@@ -68,150 +61,9 @@ axios.get(`http://127.0.0.1:8000/orders/${user}`).then(res=>set_orders(res.data)
     
               </tr>
 
-{/* <div class="modal fade" id={`ord${index}`} tabindex="-1" role="dialog" aria-labelledby={`sord${index}`}    aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id={`sord${index}`} > Order Status </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" id="printThis">
-            <div class="container" style={{paddingRight: '0px' , paddingLeft: '0px'}}>
-                <article class="card">
-                    <div class="card-body">
-                        <h6><strong>Order ID:</strong> </h6>
-                        
-                        <div class="track">
-                            { o.state === 1 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </> : null
-                           
-                            }
-
-                            { o.state === 2 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </>  : null
-                           
-                            }
-
-                            { o.state === 3 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step active "> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </>  : null
-                           
-                            }
-
-                            { o.state === 4 ?<>
-                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                           <div class="step active "> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                           <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                           <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                           <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </>  : null
-                              
-                               }
-
-                            { o.state === 5 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step active "> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </> : null  
-                           
-
-                            }
-                            </div>
-                            </div>
-                            </article>
-                            </div>
-                            </div></div></div></div>
- */}
 
 
-        <Modal show={showModal} onHide={handleClose} contentClassName="custom-modal"   >
-        <Modal.Header closeButton >
-        <Modal.Title> Order Status </Modal.Title>
-        </Modal.Header>
-        <Modal.Body >
-        <div class="container" style={{paddingRight: '0px' , paddingLeft: '0px'}}  >
-                <article class="card">
-                    <div class="card-body">
-                        <h5><strong>Order ID:</strong> </h5>
-                        
-                        <div class="track">
-                            { o.state === 1 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </> : null
-                           
-                            }
-
-                            { o.state === 2 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </>  : null
-                           
-                            }
-
-                            { o.state === 3 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step active "> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </>  : null
-                           
-                            }
-
-                            { o.state === 4 ?<>
-                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                           <div class="step active "> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                           <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                           <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                           <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </>  : null
-                              
-                               }
-
-                            { o.state === 5 ?<>
-                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
-                                        <div class="step active "> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">Order Confirmed</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text"> Preparing your Order</span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                                        <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Delivered</span> </div>  </> : null  
-                           
-
-                            }
-                            </div>
-                            </div>
-                            </article>
-                            </div>
-
-
-
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-                            </>
+          </>
 
 
 
@@ -221,7 +73,6 @@ axios.get(`http://127.0.0.1:8000/orders/${user}`).then(res=>set_orders(res.data)
             </tbody>
 
         </table>
-
 
         
 

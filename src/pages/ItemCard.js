@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ItemsCard = (props) => {
   const { addItem } = useCart();
-  const notify = () => toast(`${props.title} has been added to your cart`);
 
   return (
     <div className="col-lg-4 col-md-4 col-sm-6 mb-5 ">
@@ -26,7 +25,17 @@ const ItemsCard = (props) => {
               className="btn btn-dark w-100 "
               onClick={() => {
                 addItem(props.item);
-                notify();
+
+                toast(`${props.title} has been added to your cart`, {
+                  position: "top-right",
+                  autoClose: 1000,
+                  hideProgressBar: true,
+                  closeOnClick: false,
+                  pauseOnHover: false,
+                  draggable: false,
+                  progress: undefined,
+                  theme: "dark"
+                });
               }}
             >
               Add To Cart
