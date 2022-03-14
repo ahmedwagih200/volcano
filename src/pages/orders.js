@@ -26,7 +26,7 @@ axios.get(`http://127.0.0.1:8000/orders/${user}`).then(res=>set_orders(res.data)
     return<div className="container mt-5">
 
         <table className="table mt-3 "  >
-            <thead className="table-dark bg-dark">
+            <thead className="bg-dark  text-light " style={{ height: "60px" , fontSize: "21px" }}  >
                 <th> Order ID </th>
                 <th> Order Date </th>
 
@@ -44,7 +44,7 @@ axios.get(`http://127.0.0.1:8000/orders/${user}`).then(res=>set_orders(res.data)
               <tr>
                 <td> {o.id}</td>
                 <td> {o.date}</td>
-                <td> {o.address}</td>
+                <td className="text-capitalize" > {o.address}</td>
                 <td>{o.total } EGP</td>
                 <td className="text-capitalize" > {o.payment}</td>
                 <td>
