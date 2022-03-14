@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password_confirm } from '../../actions/auth';
 import { useParams } from 'react-router-dom';
+import {toast, ToastContainer} from "react-toastify";
 
 const ResetPasswordConfirm = ({ reset_password_confirm }) => {
     let { uid } = useParams();
@@ -17,20 +18,35 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        reset_password_confirm(uid, token, new_password, re_new_password);
-        setRequestSent(true);
-    };
+        if (new_password === re_new_password) {
+            reset_password_confirm(uid, token, new_password, re_new_password);
+            setRequestSent(true);
+        } else {
+            toast.error("Passwords Must be The same", {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark"
+            });
+        }
+    }
 
     if (requestSent) {
         return <Navigate to='/' />
     }
 
     return (
-        <div className='container mt-5'>
-            <form onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
+        <div className='container-fluid forms'>
+
+            <form style={{width: '50%' ,marginLeft: '25%'}} onSubmit={e => onSubmit(e)}>
+                <div className='form-group pt-5'>
                     <input
-                        className='form-control'
+
+                        className='form-control '
                         type='password'
                         placeholder='New Password'
                         name='new_password'
@@ -40,7 +56,7 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
                         required
                     />
                 </div>
-                <div className='form-group'>
+                <div className='form-group '>
                     <input
                         className='form-control'
                         type='password'
@@ -52,8 +68,9 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
                         required
                     />
                 </div>
-                <button className='btn btn-primary' type='submit'>Reset Password</button>
+                <button className='btn btn-dark' type='submit'>Reset Password</button>
             </form>
+            <ToastContainer/>
         </div>
     );
 };

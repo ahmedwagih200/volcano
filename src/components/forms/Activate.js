@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { verify } from '../../actions/auth';
 import { useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ const Activate = ({ verify }) => {
     };
 
     if (verified) {
-        return <Navigate to='/' />
+        window.close()
     }
 
     return (

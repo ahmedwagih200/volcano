@@ -20,6 +20,8 @@ export default function Reviews() {
     return (
 
         <div  className="container-fluid justify-content-center p-4 MakeReviews">
+            <NavLink to="/MakeReview" style={{fontSize:'20px', height: '50px' ,width: '130px' , marginLeft:"45%"}}
+                     className="nav-link active px-lg-4 rounded">Make Review</NavLink>
             <div style={{overflow: "auto" , height: "500px"}}>
             {reviews.map((rev) => {
                 return (
@@ -34,9 +36,6 @@ export default function Reviews() {
                 );
             })}
             </div>
-
-            <NavLink to="/MakeReview" style={{fontSize:'20px', height: '50px' ,width: '130px' , marginLeft:"45%"}}
-                     className="nav-link active px-lg-4 rounded">Make Review</NavLink>
         </div>
     );
 }

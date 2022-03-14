@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {toast, ToastContainer} from "react-toastify";
+import './forms.css';
 
 const Profile = () => {
 
@@ -79,7 +80,7 @@ const Profile = () => {
         });
     }
     return (
-        <div style={{ width: '30%' }} className='container mt-2'>
+        <div style={{ width: '30%' }} className='container mt-2 '>
             <h4 style={{ margin: '5px' }}> My Profile info</h4>
             <form onSubmit={e => onSubmit(e)}>
                 <div style={{ margin: '5px' }} className='form-group'>

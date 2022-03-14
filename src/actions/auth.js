@@ -157,6 +157,16 @@ export const signup = (first_name, last_name, email, address, phone, password, r
             type: SIGNUP_SUCCESS,
             payload: res.data
         });
+        toast.success("Account Created Successfully , Check Your Email For Activation Link", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark"
+        });
     } catch (err) {
 
         for (let error in err.response.data) {

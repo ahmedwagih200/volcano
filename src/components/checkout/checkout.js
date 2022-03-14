@@ -8,10 +8,11 @@ import {connect} from "react-redux";
 import {checkAuthenticated, login} from "../../actions/auth";
 import axios from "axios";
 import {Button} from "@mui/material";
+import {ToastContainer} from "react-toastify";
 
 const Checkout = ({login, isAuthenticated}) => {
 
-    const {items} = useCart();
+    const {items, setItems} = useCart();
 
     const [visible, setVisible]=useState(false);
 
@@ -23,7 +24,6 @@ const Checkout = ({login, isAuthenticated}) => {
 
     let navigate = useNavigate();
 
-    
 
     useEffect(() => {
 
@@ -75,8 +75,6 @@ const Checkout = ({login, isAuthenticated}) => {
 
     const onlinePayment = () => {
 
-
-
         axios.post('http://localhost:8000/api/stripe/create-checkout-session', {
                 'items': items
             },
@@ -86,7 +84,7 @@ const Checkout = ({login, isAuthenticated}) => {
                 }
             }
         )
-            .then(res => window.open(res.data.url, '_blank'))
+            .then(res => {  window.open(res.data.url, '_blank', )})
             .catch(error => console.log(error))
     };
 
@@ -113,9 +111,6 @@ const Checkout = ({login, isAuthenticated}) => {
               'address':address, 
               'phone':phone ,
               'cash':visible,
-              
-
-              
           },
           {
               headers: {
@@ -124,16 +119,12 @@ const Checkout = ({login, isAuthenticated}) => {
               }
           }
         )
-        .then(res => console.log(res))
+        .then(res => {console.log(res); setItems([]); return navigate("/");})
         .catch(error => console.log(error))
         
         })
         
-        .catch(error => console.log(error))  
-        
-
-        // save order data To DB
-
+        .catch(error => console.log(error))
     };
 
     const login_render = () => (
@@ -187,10 +178,14 @@ const Checkout = ({login, isAuthenticated}) => {
 
                             <div className='pb-5'>
                                 <Icon.PinMapFill color='brown' size={30} className="" > </Icon.PinMapFill>
+
                             </div>
+
                         </Grid>
+
                         <Grid item xs={6}>
-                            <div className="pt-3">
+                            <p>Another address for this order ?</p>
+                            <div >
                                 <form onSubmit={e => onSubmit(e)}>
 
                                     <div style={{ margin: '5px' }} className='form-group'>
@@ -243,7 +238,7 @@ const Checkout = ({login, isAuthenticated}) => {
                                 <Icon.Cash className='' size={40} color='brown' />
                             </Grid>
                             <Grid item xs={6} className='pr-5 pt-2'>
-                                <span > cash On Delivery</span>
+                                <span > Cash On Delivery</span>
                             </Grid>
                         </Grid>
 
@@ -260,7 +255,7 @@ const Checkout = ({login, isAuthenticated}) => {
                                 <Icon.CardHeading className='' size={40} color='brown' />
                             </Grid>
                             <Grid item xs={6} className='pr-5 pt-2'>
-                                <span>Visa</span>
+                                <span>Credit Card</span>
                             </Grid>
                         </Grid>
 
@@ -306,7 +301,7 @@ const Checkout = ({login, isAuthenticated}) => {
         <div style={{padding: "100px"}} className="container-fluid MakeReviews">
 
             {isAuthenticated ? cart_render()  : login_render()}
-
+            <ToastContainer/>
         </div>
     );
 }

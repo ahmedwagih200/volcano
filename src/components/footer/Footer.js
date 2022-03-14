@@ -8,50 +8,24 @@ const Footer = () => {
             <h4>Volcano</h4>
             <ul>
               <li>
-                <a href="#">About us</a>
+                <a href="#">All&nbsp; rights&nbsp; reserved &nbsp;. &nbsp;copyright © 2022</a>
               </li>
-              <li>
-                <a href="#">Our services</a>
-              </li>
-              <li>
-                <a href="#">Privacy policy</a>
-              </li>
+
+
             </ul>
           </div>
           <div className="footer-col">
-            <h4>get help</h4>
+            <h4>Contact Us</h4>
             <ul>
               <li>
-                <a href="#">FAQ</a>
+                <a href="#">07775000</a>
               </li>
               <li>
-                <a href="#">order status</a>
-              </li>
-              <li>
-                <a href="#">Payment options</a>
+                <a href="#">07775000</a>
               </li>
             </ul>
           </div>
-          <div className="footer-col">
-            <h4> online shop</h4>
-            <ul>
-              <li>
-                <a href="#">Hot drinks</a>
-              </li>
-              <li>
-                <a href="#"> Smoothies</a>
-              </li>
-              <li>
-                <a href="#">Fresh juice</a>
-              </li>
-              <li>
-                <a href="#">Desserts</a>
-              </li>
-              <li>
-                <a href="#">Waffles and Pancakes</a>
-              </li>
-            </ul>
-          </div>
+
           <div className="footer-col">
             <h4> Follow us</h4>
             <div className="social-links">
@@ -60,14 +34,14 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <i className="fab fa-facebook-f"></i>
+                <i className="fab fa-facebook-f"/>
               </a>
               <a
                 href="https://instagram.com/volcano.enjoy.yourchocolate?utm_medium=copy_link"
                 target="_blank"
                 rel="noreferrer"
               >
-                <i className="fab fa-instagram"></i>
+                <i className="fab fa-instagram"/>
               </a>
             </div>
           </div>

@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {connect} from "react-redux";
 import './style.css';
+import {ToastContainer} from "react-toastify";
 
 
 const MakeReview = ({login, isAuthenticated}) => {
@@ -144,7 +145,7 @@ const MakeReview = ({login, isAuthenticated}) => {
         <div style={{padding: "100px"}} className="container-fluid MakeReviews">
 
             {isAuthenticated ? review_render() : login_render()}
-
+            <ToastContainer/>
         </div>
     )
 };

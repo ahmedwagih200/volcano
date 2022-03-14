@@ -2,7 +2,7 @@ import '../about/about.css';
 import React, { Component }  from 'react';
 function About() {
   return (
-    <div data-aos="fade" data-aos-duration="1000" className="about" style={{backgroundColor: '#ffffff', padding:'10px'}} >
+    <div data-aos="fade" data-aos-duration="1500" className="about" style={{backgroundColor: '#ffffff', padding:'10px'}} >
       <div data-aos="fade-down" data-aos-duration="1000" id="about" className="offset container mt-3 mb-5">
         <div  style={{ textAlign: 'center' , marginTop: '150px'}} >
           <h1 style={{marginRight: '150px', marginBottom: "25px"}} className="display-4 font-weight-bold">About Us</h1>

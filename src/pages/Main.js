@@ -2,16 +2,19 @@ import About from "../components/about/About";
 import Footer from "../components/footer/Footer";
 import Menu from "../components/menu/Menu";
 import Slider from "../components/slider/Slider";
-import React, {Component, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 import QueryString from 'query-string';
 import { useCart } from "react-use-cart";
 import axios from "axios";
 
 function Main() {
-  const {items , cartTotal} = useCart();
+
+    const {items , setItems, cartTotal } = useCart();
+
 
     const location = useLocation();
+
     useEffect(() => {
         const values = QueryString.parse(location.search);
         if (values.success) {
@@ -37,31 +40,25 @@ function Main() {
             'address': localStorage.getItem('address') , 
             'phone':localStorage.getItem('phone')  ,
             'cash':localStorage.getItem('cash') ,
-            
 
-            
         },
         {
             headers: {
                 "Authorization": `AUTHORIZATION_KEY`,
                 "Content-Type": 'application/json'
             }
+
         }
+
       )
-      .then(res => window.close() )
+      .then(() => { window.close()} )
+
       .catch(error => console.log(error))
-
-
-      
       })
-          
-      .catch(error => console.log(error))  
-      
 
-
-            //save order To DB
-            
+      .catch(error => console.log(error))
         }
+
         if (values.canceled) {
 
             window.close()

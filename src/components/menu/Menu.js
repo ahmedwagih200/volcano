@@ -17,7 +17,7 @@ function Menu() {
            {
                cate.map(( c , ind  )=>{
           
-           return <div className="col-lg-3 col-md-4 col-sm-6 my-4 ">
+           return <div data-aos="fade-right" data-aos-duration="1000" className="col-lg-3 col-md-4 col-sm-6 my-4 ">
                 <Link to={`/category/${c.id}`}  style={{ textDecoration:'None' }} > 
                  { console.log(c.image )}
                       <div className=" card h-100 card-light">

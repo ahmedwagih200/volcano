@@ -47,7 +47,7 @@ function Navbar({logout, isAuthenticated}) {
         <nav className="navbar navbar-light bg-light p-0">
             <div className="container-fluid">
                 <div style={{marginLeft: "30%"}} className="d-flex">
-                    <div data-aos="fade-right" data-aos-duration="1500" className=" container-fluid sticky-top bg-light">
+                    <div data-aos="fade-down" data-aos-duration="1500" className=" container-fluid sticky-top bg-light">
 
                         <div className="row justify-content-center ">
                             <Navlink name="Home" val="Main"/>
@@ -59,7 +59,7 @@ function Navbar({logout, isAuthenticated}) {
                                 <img src={logo} alt="logo"/>
                             </div>
 
-                            <Navitem name="Contact" val="Main#contact"/>
+                            <Navitem name="Contact" val="Contact"/>
                             <Navlink name="Reviews" val="Reviews"/>
 
                             <Link style={{ marginTop:"25px" ,fontSize:'25px'}}

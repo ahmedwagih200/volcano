@@ -36,6 +36,7 @@ import MakeReview from "./components/reviews/MakeReview";
 
 import Home from "./components/checkout/checkout";
 import Cheackout_address from "./components/checkout/change address_checkout";
+import Contact from "./components/contact/Contact";
 
 function App() {
 
@@ -51,7 +52,6 @@ function App() {
             <Route path="orders" element={<Orders />} />
             <Route path="order/:id/:cost/:date" element={<Order />}  />
             <Route path="checkout" element={<Home />}/>
-            <Route path="change_address" element={<Cheackout_address />} />
             <Route path="status/:id/:ord" element={<Status />}  />
 
             <Route path="Form_container" element={<Form_container />}>
@@ -71,6 +71,7 @@ function App() {
             <Route path="Cart" element={<Cart />} />
 
             <Route path="Reviews" element={<Reviews />} />
+            <Route path="Contact" element={<Contact />} />
             <Route path="MakeReview" element={<MakeReview />} />
           </Routes>
         </Router>
