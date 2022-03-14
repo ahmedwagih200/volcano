@@ -5,6 +5,12 @@ table.table td a.view i {
     margin: 2px 0 0 1px;
 }   
 
+thead {
+    font-family: "Rancho", cursive;
+}
+
+
+
 .custom-dialog { width: 90%; }
 
 
